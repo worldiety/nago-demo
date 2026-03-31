@@ -29,7 +29,7 @@ func grid(wnd core.Window) core.View {
 		ui.GridCell(tableSingleLine(wnd)),
 		ui.GridCell(tableMultiLine(wnd)),
 		ui.GridCell(tableOther(wnd)),
-	).Columns(cols).Gap(ui.L32).FullWidth()
+	).Columns(cols).Gap(ui.L32).FullWidth().Heights("auto")
 }
 
 func tableSingleLine(wnd core.Window) core.View {

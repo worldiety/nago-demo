@@ -2,7 +2,9 @@ package main
 
 import (
 	_ "embed"
+
 	"github.com/worldiety/nago-demo/pages/bool"
+	"github.com/worldiety/nago-demo/pages/datetime"
 	"github.com/worldiety/nago-demo/pages/home"
 	"github.com/worldiety/nago-demo/pages/selection"
 	"github.com/worldiety/nago-demo/pages/text"
@@ -41,6 +43,7 @@ func create() *application.Application {
 				Footer(ui.HStack(ui.Text("go.wdy.de/nago@" + util.DependencyVersion("go.wdy.de/nago"))).Alignment(ui.Center).FullWidth()).
 				MenuEntry().Title("Auswahl").Icon(icons.List).Forward("selection").OneOfRole().
 				MenuEntry().Title("Bool").Icon(icons.Check).Forward("bool").OneOfRole().
+				MenuEntry().Title("Datum/Zeit").Icon(icons.Clock).Forward("datetime").OneOfRole().
 				MenuEntry().Title("Text").Icon(icons.TextSize).Forward("text").OneOfRole().Decorator(),
 		)
 
@@ -53,6 +56,9 @@ func create() *application.Application {
 		})
 		cfg.RootViewWithDecoration("bool", func(wnd core.Window) core.View {
 			return bool.Page(wnd)
+		})
+		cfg.RootViewWithDecoration("datetime", func(wnd core.Window) core.View {
+			return datetime.Page(wnd)
 		})
 		cfg.RootViewWithDecoration("text", func(wnd core.Window) core.View {
 			return text.Page(wnd)

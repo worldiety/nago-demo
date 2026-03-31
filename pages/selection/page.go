@@ -40,7 +40,7 @@ func grid(wnd core.Window) core.View {
 		ui.GridCell(tableRadio(wnd)),
 		ui.GridCell(tableDropdown(wnd)),
 		ui.GridCell(tablePicker(wnd)),
-	).Columns(cols).Gap(ui.L32).FullWidth()
+	).Columns(cols).Gap(ui.L32).FullWidth().Heights("auto")
 }
 
 func tableRadio(wnd core.Window) core.View {

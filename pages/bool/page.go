@@ -24,7 +24,7 @@ func grid(wnd core.Window) core.View {
 	return ui.Grid(
 		ui.GridCell(tableCheckbox(wnd)),
 		ui.GridCell(tableToggle(wnd)),
-	).Columns(cols).Gap(ui.L32).FullWidth()
+	).Columns(cols).Gap(ui.L32).FullWidth().Heights("auto")
 }
 
 func tableCheckbox(wnd core.Window) core.View {
