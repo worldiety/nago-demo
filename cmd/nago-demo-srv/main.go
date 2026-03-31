@@ -40,7 +40,11 @@ func create() *application.Application {
 			cfg.NewScaffold().
 				Login(false).
 				Logo(ui.Image().Embed(appIcon).Frame(ui.Frame{Height: ui.L48})).
-				Footer(ui.HStack(ui.Text("go.wdy.de/nago@" + util.DependencyVersion("go.wdy.de/nago"))).Alignment(ui.Center).FullWidth()).
+				Footer(ui.VStack(
+					ui.Text("NAGO-Tester: "+util.Version()),
+					ui.Text("NAGO: "+util.DependencyVersion("go.wdy.de/nago")),
+				).Alignment(ui.Center).FullWidth(),
+				).
 				MenuEntry().Title("Auswahl").Icon(icons.List).Forward("selection").OneOfRole().
 				MenuEntry().Title("Bool").Icon(icons.Check).Forward("bool").OneOfRole().
 				MenuEntry().Title("Datum/Zeit").Icon(icons.Clock).Forward("datetime").OneOfRole().
