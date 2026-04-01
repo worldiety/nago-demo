@@ -23,15 +23,7 @@ type Schmoe struct {
 
 var names = []string{"Joe Schmoe", "Joe Bro", "Joe Dough", "William Daschmoe", "Jøe Schmøe"}
 
-func Page(wnd core.Window) core.View {
-	return layout.Page(wnd,
-		"Auswahl",
-		"",
-		grid(wnd),
-	)
-}
-
-func grid(wnd core.Window) core.View {
+func Content(wnd core.Window) core.View {
 	cols := 2
 	if wnd.Info().SizeClass < core.SizeClassLarge {
 		cols = 1

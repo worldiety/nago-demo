@@ -3,12 +3,9 @@ package main
 import (
 	_ "embed"
 
-	"github.com/worldiety/nago-demo/pages/bool"
 	"github.com/worldiety/nago-demo/pages/buttons"
-	"github.com/worldiety/nago-demo/pages/datetime"
 	"github.com/worldiety/nago-demo/pages/home"
-	"github.com/worldiety/nago-demo/pages/selection"
-	"github.com/worldiety/nago-demo/pages/text"
+	"github.com/worldiety/nago-demo/pages/input"
 	"github.com/worldiety/nago-demo/pages/typography"
 	"github.com/worldiety/nago-demo/util"
 
@@ -47,11 +44,8 @@ func create() *application.Application {
 					ui.Text("NAGO: "+util.DependencyVersion("go.wdy.de/nago")),
 				).Alignment(ui.Center).FullWidth(),
 				).
-				MenuEntry().Title("Auswahl").Icon(icons.List).Forward("selection").OneOfRole().
-				MenuEntry().Title("Bool").Icon(icons.Check).Forward("bool").OneOfRole().
 				MenuEntry().Title("Buttons").Icon(icons.CirclePlus).Forward("buttons").OneOfRole().
-				MenuEntry().Title("Datum/Zeit").Icon(icons.Clock).Forward("datetime").OneOfRole().
-				MenuEntry().Title("Text").Icon(icons.Keyboard).Forward("text").OneOfRole().
+				MenuEntry().Title("Eingabe").Icon(icons.TextSize).Forward("input").OneOfRole().
 				MenuEntry().Title("Typografie").Icon(icons.TextSize).Forward("typography").OneOfRole().Decorator(),
 		)
 
@@ -59,20 +53,11 @@ func create() *application.Application {
 			return home.Page(wnd)
 		})
 
-		cfg.RootViewWithDecoration("selection", func(wnd core.Window) core.View {
-			return selection.Page(wnd)
-		})
-		cfg.RootViewWithDecoration("bool", func(wnd core.Window) core.View {
-			return bool.Page(wnd)
-		})
 		cfg.RootViewWithDecoration("buttons", func(wnd core.Window) core.View {
 			return buttons.Page(wnd)
 		})
-		cfg.RootViewWithDecoration("datetime", func(wnd core.Window) core.View {
-			return datetime.Page(wnd)
-		})
-		cfg.RootViewWithDecoration("text", func(wnd core.Window) core.View {
-			return text.Page(wnd)
+		cfg.RootViewWithDecoration("input", func(wnd core.Window) core.View {
+			return input.Page(wnd)
 		})
 		cfg.RootViewWithDecoration("typography", func(wnd core.Window) core.View {
 			return typography.Page(wnd)

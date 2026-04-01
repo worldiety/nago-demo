@@ -13,6 +13,6 @@ func Page(_ core.Window, title, subtitle string, view core.View) core.View {
 		).Gap(ui.L8)),
 		ui.VStack(
 			view,
-		),
-	).Gap(ui.L32).Padding(ui.Padding{Top: ui.L32, Bottom: ui.L120})
+		).FullWidth(),
+	).Gap(ui.L32).FullWidth().Padding(ui.Padding{Top: ui.L32, Bottom: ui.L120}).Frame(ui.Frame{Width: ui.L1200, MaxWidth: ui.Full})
 }

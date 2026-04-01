@@ -26,7 +26,9 @@ func ComponentValueTable(rows ...ComponentValueTableRow) core.View {
 
 func inputCell(view core.View) ui.TTableCell {
 	return ui.TableCell(
-		view,
+		ui.HStack(
+			view,
+		),
 	)
 }
 
