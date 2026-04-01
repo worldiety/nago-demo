@@ -3,6 +3,7 @@ package main
 import (
 	_ "embed"
 
+	"github.com/worldiety/nago-demo/pages/content"
 	"github.com/worldiety/nago-demo/pages/home"
 	"github.com/worldiety/nago-demo/pages/input"
 	"github.com/worldiety/nago-demo/pages/interaction"
@@ -46,6 +47,7 @@ func create() *application.Application {
 				).Alignment(ui.Center).FullWidth(),
 				).
 				MenuEntry().Title("Eingabe").Icon(flowbiteOutline.Keyboard).Forward("input").OneOfRole().
+				MenuEntry().Title("Inhalt").Icon(flowbiteOutline.Image).Forward("content").OneOfRole().
 				MenuEntry().Title("Interaktion").Icon(heroOutline.CursorArrowRays).Forward("interaction").OneOfRole().
 				MenuEntry().Title("Typografie").Icon(flowbiteOutline.TextSize).Forward("typography").OneOfRole().Decorator(),
 		)
@@ -56,6 +58,9 @@ func create() *application.Application {
 
 		cfg.RootViewWithDecoration("input", func(wnd core.Window) core.View {
 			return input.Page(wnd)
+		})
+		cfg.RootViewWithDecoration("content", func(wnd core.Window) core.View {
+			return content.Page(wnd)
 		})
 		cfg.RootViewWithDecoration("interaction", func(wnd core.Window) core.View {
 			return interaction.Page(wnd)

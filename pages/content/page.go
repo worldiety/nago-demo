@@ -1,11 +1,9 @@
-package input
+package content
 
 import (
 	"github.com/worldiety/nago-demo/layout"
-	boolInput "github.com/worldiety/nago-demo/pages/input/bool"
-	"github.com/worldiety/nago-demo/pages/input/datetime"
-	"github.com/worldiety/nago-demo/pages/input/selection"
-	"github.com/worldiety/nago-demo/pages/input/text"
+	"github.com/worldiety/nago-demo/pages/content/accordion"
+	"github.com/worldiety/nago-demo/pages/content/switcher"
 	"go.wdy.de/nago/presentation/ui/dropdown"
 
 	"go.wdy.de/nago/presentation/core"
@@ -14,20 +12,12 @@ import (
 
 var categoryOptions = []dropdown.Option[string]{
 	{
-		Value: "bool",
-		Label: "Bool'sche Werte",
+		Value: "accordion",
+		Label: "Akkordeon",
 	},
 	{
-		Value: "datetime",
-		Label: "Datum/Zeit",
-	},
-	{
-		Value: "selection",
-		Label: "Auswahl",
-	},
-	{
-		Value: "text",
-		Label: "Text",
+		Value: "switcher",
+		Label: "Switcher",
 	},
 }
 
@@ -55,7 +45,7 @@ func page(wnd core.Window) core.View {
 
 	return ui.VStack(
 		ui.Stack(
-			ui.Text("Eingabe").Font(ui.HeadlineLarge),
+			ui.Text("Inhalt").Font(ui.HeadlineLarge),
 			ui.Spacer(),
 			dropdown.Dropdown("", categoryOptions, stateCategory.Get()).
 				InputValue(stateCategory),
@@ -66,14 +56,10 @@ func page(wnd core.Window) core.View {
 
 func pageContent(wnd core.Window, page string) core.View {
 	switch page {
-	case "bool":
-		return boolInput.Content(wnd)
-	case "datetime":
-		return datetime.Content(wnd)
-	case "selection":
-		return selection.Content(wnd)
-	case "text":
-		return text.Content(wnd)
+	case "accordion":
+		return accordion.Content(wnd)
+	case "switcher":
+		return switcher.Content(wnd)
 	}
 
 	return ui.HStack()

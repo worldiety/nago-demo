@@ -39,12 +39,12 @@ func page(wnd core.Window) core.View {
 	})
 
 	return ui.VStack(
-		ui.HStack(
+		ui.Stack(
 			ui.Text("Interaktion").Font(ui.HeadlineLarge),
 			ui.Spacer(),
 			dropdown.Dropdown("", categoryOptions, stateCategory.Get()).
 				InputValue(stateCategory),
-		).FullWidth(),
+		).Gap(ui.L8).FullWidth(),
 		pageContent(wnd, stateCategory.Get()),
 	).Gap(ui.L32).FullWidth()
 }
