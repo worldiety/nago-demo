@@ -4,6 +4,7 @@ import (
 	_ "embed"
 
 	"github.com/worldiety/nago-demo/pages/bool"
+	"github.com/worldiety/nago-demo/pages/buttons"
 	"github.com/worldiety/nago-demo/pages/datetime"
 	"github.com/worldiety/nago-demo/pages/home"
 	"github.com/worldiety/nago-demo/pages/selection"
@@ -47,6 +48,7 @@ func create() *application.Application {
 				).
 				MenuEntry().Title("Auswahl").Icon(icons.List).Forward("selection").OneOfRole().
 				MenuEntry().Title("Bool").Icon(icons.Check).Forward("bool").OneOfRole().
+				MenuEntry().Title("Buttons").Icon(icons.CirclePlus).Forward("buttons").OneOfRole().
 				MenuEntry().Title("Datum/Zeit").Icon(icons.Clock).Forward("datetime").OneOfRole().
 				MenuEntry().Title("Text").Icon(icons.TextSize).Forward("text").OneOfRole().Decorator(),
 		)
@@ -60,6 +62,9 @@ func create() *application.Application {
 		})
 		cfg.RootViewWithDecoration("bool", func(wnd core.Window) core.View {
 			return bool.Page(wnd)
+		})
+		cfg.RootViewWithDecoration("buttons", func(wnd core.Window) core.View {
+			return buttons.Page(wnd)
 		})
 		cfg.RootViewWithDecoration("datetime", func(wnd core.Window) core.View {
 			return datetime.Page(wnd)

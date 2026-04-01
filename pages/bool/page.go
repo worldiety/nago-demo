@@ -120,7 +120,7 @@ func table(title string, rows ...layout.ComponentValueTableRow) core.View {
 	return ui.VStack(
 		ui.Text(title).Font(ui.HeadlineSmall),
 		layout.ComponentValueTable(rows...),
-	).Alignment(ui.Top)
+	).Alignment(ui.Top).Gap(ui.L4)
 }
 
 func boolToString(value bool) string {
