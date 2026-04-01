@@ -9,6 +9,7 @@ import (
 	"github.com/worldiety/nago-demo/pages/home"
 	"github.com/worldiety/nago-demo/pages/selection"
 	"github.com/worldiety/nago-demo/pages/text"
+	"github.com/worldiety/nago-demo/pages/typography"
 	"github.com/worldiety/nago-demo/util"
 
 	"github.com/worldiety/option"
@@ -50,7 +51,8 @@ func create() *application.Application {
 				MenuEntry().Title("Bool").Icon(icons.Check).Forward("bool").OneOfRole().
 				MenuEntry().Title("Buttons").Icon(icons.CirclePlus).Forward("buttons").OneOfRole().
 				MenuEntry().Title("Datum/Zeit").Icon(icons.Clock).Forward("datetime").OneOfRole().
-				MenuEntry().Title("Text").Icon(icons.TextSize).Forward("text").OneOfRole().Decorator(),
+				MenuEntry().Title("Text").Icon(icons.Keyboard).Forward("text").OneOfRole().
+				MenuEntry().Title("Typografie").Icon(icons.TextSize).Forward("typography").OneOfRole().Decorator(),
 		)
 
 		cfg.RootViewWithDecoration(".", func(wnd core.Window) core.View {
@@ -71,6 +73,9 @@ func create() *application.Application {
 		})
 		cfg.RootViewWithDecoration("text", func(wnd core.Window) core.View {
 			return text.Page(wnd)
+		})
+		cfg.RootViewWithDecoration("typography", func(wnd core.Window) core.View {
+			return typography.Page(wnd)
 		})
 	})
 }

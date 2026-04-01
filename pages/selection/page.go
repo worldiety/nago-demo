@@ -6,6 +6,7 @@ import (
 
 	"github.com/worldiety/nago-demo/layout"
 	icons "go.wdy.de/nago/presentation/icons/hero/outline"
+	"go.wdy.de/nago/presentation/ui/colorpicker"
 	"go.wdy.de/nago/presentation/ui/dropdown"
 	"go.wdy.de/nago/presentation/ui/picker"
 
@@ -40,6 +41,7 @@ func grid(wnd core.Window) core.View {
 		ui.GridCell(tableRadio(wnd)),
 		ui.GridCell(tableDropdown(wnd)),
 		ui.GridCell(tablePicker(wnd)),
+		ui.GridCell(tableColor(wnd)),
 	).Columns(cols).Gap(ui.L32).FullWidth().Heights("auto")
 }
 
@@ -151,6 +153,41 @@ func tablePicker(wnd core.Window) core.View {
 			Component: picker.Picker[string]("Disabled", names, statePickerDisabled).
 				Disabled(true),
 			Value: strings.Join(statePickerDisabled.Get(), ", "),
+		},
+	)
+}
+
+func tableColor(wnd core.Window) core.View {
+	stateColorDefault := core.StateOf[ui.Color](wnd, "stateColorDefault")
+	stateColorSupport := core.StateOf[ui.Color](wnd, "stateColorSupport")
+	stateColorError := core.StateOf[ui.Color](wnd, "stateColorError")
+	stateColorDisabled := core.StateOf[ui.Color](wnd, "stateColorDisabled")
+
+	stateColorDisabled.Set("#1b8c30")
+
+	return table("Farbe",
+		layout.ComponentValueTableRow{
+			Component: colorpicker.PalettePicker("Standard", colorpicker.DefaultPalette).
+				State(stateColorDefault),
+			Value: string(stateColorDefault.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: colorpicker.PalettePicker("Support", colorpicker.DefaultPalette).
+				State(stateColorSupport).
+				SupportingText("Hier steht ein Support-Text"),
+			Value: string(stateColorSupport.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: colorpicker.PalettePicker("Fehler", colorpicker.DefaultPalette).
+				State(stateColorError).
+				ErrorText("Hier steht ein Fehler-Text"),
+			Value: string(stateColorError.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: colorpicker.PalettePicker("Disabled", colorpicker.DefaultPalette).
+				State(stateColorDisabled).
+				Disabled(true),
+			Value: string(stateColorDisabled.Get()),
 		},
 	)
 }
