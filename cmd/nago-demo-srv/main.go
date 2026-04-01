@@ -45,7 +45,7 @@ func create() *application.Application {
 					ui.Text("NAGO: "+util.DependencyVersion("go.wdy.de/nago")),
 				).Alignment(ui.Center).FullWidth(),
 				).
-				MenuEntry().Title("Eingabe").Icon(flowbiteOutline.TextSize).Forward("input").OneOfRole().
+				MenuEntry().Title("Eingabe").Icon(flowbiteOutline.Keyboard).Forward("input").OneOfRole().
 				MenuEntry().Title("Interaktion").Icon(heroOutline.CursorArrowRays).Forward("interaction").OneOfRole().
 				MenuEntry().Title("Typografie").Icon(flowbiteOutline.TextSize).Forward("typography").OneOfRole().Decorator(),
 		)
