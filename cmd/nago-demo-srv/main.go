@@ -3,9 +3,9 @@ package main
 import (
 	_ "embed"
 
-	"github.com/worldiety/nago-demo/pages/buttons"
 	"github.com/worldiety/nago-demo/pages/home"
 	"github.com/worldiety/nago-demo/pages/input"
+	"github.com/worldiety/nago-demo/pages/interaction"
 	"github.com/worldiety/nago-demo/pages/typography"
 	"github.com/worldiety/nago-demo/util"
 
@@ -15,7 +15,8 @@ import (
 	cfgmigration "go.wdy.de/nago/application/migration/cfg"
 	cfgrebac "go.wdy.de/nago/application/rebac/cfg"
 	"go.wdy.de/nago/presentation/core"
-	icons "go.wdy.de/nago/presentation/icons/flowbite/outline"
+	flowbiteOutline "go.wdy.de/nago/presentation/icons/flowbite/outline"
+	heroOutline "go.wdy.de/nago/presentation/icons/hero/outline"
 	"go.wdy.de/nago/presentation/ui"
 	"go.wdy.de/nago/web/vuejs"
 )
@@ -44,20 +45,20 @@ func create() *application.Application {
 					ui.Text("NAGO: "+util.DependencyVersion("go.wdy.de/nago")),
 				).Alignment(ui.Center).FullWidth(),
 				).
-				MenuEntry().Title("Buttons").Icon(icons.CirclePlus).Forward("buttons").OneOfRole().
-				MenuEntry().Title("Eingabe").Icon(icons.TextSize).Forward("input").OneOfRole().
-				MenuEntry().Title("Typografie").Icon(icons.TextSize).Forward("typography").OneOfRole().Decorator(),
+				MenuEntry().Title("Eingabe").Icon(flowbiteOutline.TextSize).Forward("input").OneOfRole().
+				MenuEntry().Title("Interaktion").Icon(heroOutline.CursorArrowRays).Forward("interaction").OneOfRole().
+				MenuEntry().Title("Typografie").Icon(flowbiteOutline.TextSize).Forward("typography").OneOfRole().Decorator(),
 		)
 
 		cfg.RootViewWithDecoration(".", func(wnd core.Window) core.View {
 			return home.Page(wnd)
 		})
 
-		cfg.RootViewWithDecoration("buttons", func(wnd core.Window) core.View {
-			return buttons.Page(wnd)
-		})
 		cfg.RootViewWithDecoration("input", func(wnd core.Window) core.View {
 			return input.Page(wnd)
+		})
+		cfg.RootViewWithDecoration("interaction", func(wnd core.Window) core.View {
+			return interaction.Page(wnd)
 		})
 		cfg.RootViewWithDecoration("typography", func(wnd core.Window) core.View {
 			return typography.Page(wnd)
