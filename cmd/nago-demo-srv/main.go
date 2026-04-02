@@ -49,6 +49,7 @@ func create() *application.Application {
 							ui.Image().Embed(appIcon).Frame(ui.Frame{Height: ui.L48}),
 							versionsView(),
 						).
+							NoClip(true).
 							Gap(ui.L32).
 							Alignment(ui.Leading).
 							Padding(ui.Padding{}.Horizontal(ui.L16)).
