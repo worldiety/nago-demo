@@ -2,6 +2,7 @@ package content
 
 import (
 	"github.com/worldiety/nago-demo/layout"
+	"github.com/worldiety/nago-demo/pages"
 	"github.com/worldiety/nago-demo/pages/content/accordion"
 	"github.com/worldiety/nago-demo/pages/content/dialog"
 	"github.com/worldiety/nago-demo/pages/content/switcher"
@@ -49,12 +50,7 @@ func page(wnd core.Window) core.View {
 	})
 
 	return ui.VStack(
-		ui.Stack(
-			ui.Text("Inhalt").Font(ui.HeadlineLarge),
-			ui.Spacer(),
-			dropdown.Dropdown("", categoryOptions, stateCategory.Get()).
-				InputValue(stateCategory),
-		).Gap(ui.L8).FullWidth(),
+		pages.HeaderWithSelectFilter("Inhalt", "Kategorie", categoryOptions, stateCategory),
 		pageContent(wnd, stateCategory.Get()),
 	).Gap(ui.L32).FullWidth()
 }

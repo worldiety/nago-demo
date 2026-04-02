@@ -2,6 +2,7 @@ package input
 
 import (
 	"github.com/worldiety/nago-demo/layout"
+	"github.com/worldiety/nago-demo/pages"
 	boolInput "github.com/worldiety/nago-demo/pages/input/bool"
 	"github.com/worldiety/nago-demo/pages/input/datetime"
 	"github.com/worldiety/nago-demo/pages/input/selection"
@@ -54,12 +55,7 @@ func page(wnd core.Window) core.View {
 	})
 
 	return ui.VStack(
-		ui.Stack(
-			ui.Text("Eingabe").Font(ui.HeadlineLarge),
-			ui.Spacer(),
-			dropdown.Dropdown("", categoryOptions, stateCategory.Get()).
-				InputValue(stateCategory),
-		).Gap(ui.L8).FullWidth(),
+		pages.HeaderWithSelectFilter("Eingabe", "Kategorie", categoryOptions, stateCategory),
 		pageContent(wnd, stateCategory.Get()),
 	).Gap(ui.L32).FullWidth()
 }

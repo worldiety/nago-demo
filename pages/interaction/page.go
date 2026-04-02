@@ -2,6 +2,7 @@ package interaction
 
 import (
 	"github.com/worldiety/nago-demo/layout"
+	"github.com/worldiety/nago-demo/pages"
 	"github.com/worldiety/nago-demo/pages/interaction/buttons"
 	"go.wdy.de/nago/presentation/ui/dropdown"
 
@@ -39,12 +40,7 @@ func page(wnd core.Window) core.View {
 	})
 
 	return ui.VStack(
-		ui.Stack(
-			ui.Text("Interaktion").Font(ui.HeadlineLarge),
-			ui.Spacer(),
-			dropdown.Dropdown("", categoryOptions, stateCategory.Get()).
-				InputValue(stateCategory),
-		).Gap(ui.L8).FullWidth(),
+		pages.HeaderWithSelectFilter("Interaktion", "Kategorie", categoryOptions, stateCategory),
 		pageContent(wnd, stateCategory.Get()),
 	).Gap(ui.L32).FullWidth()
 }
