@@ -54,6 +54,10 @@ go.wdy.de/nago v0.0.0-20260331064520-f8ee411deeac h1:kYbgfKRfyhd0scle4ms8e97uViS
 go.wdy.de/nago v0.0.0-20260331064520-f8ee411deeac/go.mod h1:vCzb33lxTwRykS+OITQk5tkeE5mfnk7VHc7rkCptCTI=
 go.wdy.de/nago v0.0.0-20260402070622-b41ed797be65 h1:Lr73CQ+LHlsCHd3fitoyxXEarZ9a1N0FjoEFa/hPL9g=
 go.wdy.de/nago v0.0.0-20260402070622-b41ed797be65/go.mod h1:vCzb33lxTwRykS+OITQk5tkeE5mfnk7VHc7rkCptCTI=
+go.wdy.de/nago v0.0.0-20260402120303-cff26044855d h1:Lwmvh7KboHG4Ldqf4qcZmaGH8RW5tsV9nzpjLM7Dm9A=
+go.wdy.de/nago v0.0.0-20260402120303-cff26044855d/go.mod h1:vCzb33lxTwRykS+OITQk5tkeE5mfnk7VHc7rkCptCTI=
+go.wdy.de/nago v0.0.0-20260402122756-72ef66fe2a59 h1:1wIEBKCLjfBsAtlWXpIuRPNg8T5lONwr2WjQ2NbhzxE=
+go.wdy.de/nago v0.0.0-20260402122756-72ef66fe2a59/go.mod h1:vCzb33lxTwRykS+OITQk5tkeE5mfnk7VHc7rkCptCTI=
 golang.org/x/crypto v0.45.0 h1:jMBrvKuj23MTlT0bQEOBcAE0mjg8mK9RXFhRH6nyF3Q=
 golang.org/x/crypto v0.45.0/go.mod h1:XTGrrkGJve7CYK7J8PEww4aY7gM3qMCElcJQ8n8JdX4=
 golang.org/x/crypto v0.49.0 h1:+Ng2ULVvLHnJ/ZFEq4KdcDd/cfjrrjjNSXNzxg0Y4U4=
