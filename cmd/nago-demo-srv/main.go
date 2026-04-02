@@ -43,10 +43,21 @@ func create() *application.Application {
 			cfg.NewScaffold().
 				Login(false).
 				Logo(ui.Image().Embed(appIcon).Frame(ui.Frame{Height: ui.L48})).
-				Footer(ui.HStack(
-					ui.Image().Embed(appIcon).Frame(ui.Frame{Height: ui.L48}),
-					versionsView(),
-				).Gap(ui.L32).Alignment(ui.Leading).FullWidth().Padding(ui.Padding{}.All(ui.L32)).Border(ui.Border{TopWidth: ui.L1, TopColor: ui.M5}),
+				Footer(
+					ui.HStack(
+						ui.Stack(
+							ui.Image().Embed(appIcon).Frame(ui.Frame{Height: ui.L48}),
+							versionsView(),
+						).
+							Gap(ui.L32).
+							Alignment(ui.Leading).
+							Padding(ui.Padding{}.Horizontal(ui.L16)).
+							Frame(ui.Frame{Width: ui.Full, MaxWidth: ui.L1600}),
+					).
+						Alignment(ui.Center).
+						FullWidth().
+						Padding(ui.Padding{}.Vertical(ui.L32)).
+						Border(ui.Border{TopWidth: ui.L1, TopColor: ui.M5}),
 				).
 				MenuEntry().Title("Eingabe").Icon(flowbiteOutline.Keyboard).Forward("input").OneOfRole().
 				MenuEntry().Title("Inhalt").Icon(flowbiteOutline.Image).Forward("content").OneOfRole().
