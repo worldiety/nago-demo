@@ -73,8 +73,10 @@ func tableToggle(wnd core.Window) core.View {
 	stateToggleFieldDefault := core.StateOf[bool](wnd, "stateToggleFieldDefault")
 	stateToggleFieldSupport := core.StateOf[bool](wnd, "stateToggleFieldSupport")
 	stateToggleFieldError := core.StateOf[bool](wnd, "stateToggleFieldError")
+	stateToggleFieldDisabled := core.StateOf[bool](wnd, "stateToggleFieldDisabled")
 
 	stateToggleDisabled.Set(true)
+	stateToggleFieldDisabled.Set(false)
 
 	return table("Toggle",
 		layout.ComponentValueTableRow{
@@ -104,6 +106,12 @@ func tableToggle(wnd core.Window) core.View {
 				InputValue(stateToggleFieldError).
 				ErrorText("Hier steht ein Fehler-Text"),
 			Value: boolToString(stateToggleFieldError.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: ui.ToggleField("Disabled", stateToggleFieldDisabled.Get()).
+				InputValue(stateToggleFieldDisabled).
+				Disabled(true),
+			Value: boolToString(stateToggleFieldDisabled.Get()),
 		},
 	)
 }
