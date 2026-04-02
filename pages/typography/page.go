@@ -11,17 +11,32 @@ func Page(wnd core.Window) core.View {
 	return layout.Page(wnd,
 		"",
 		"",
-		grid(wnd),
+		page(wnd),
 	)
 }
 
-func grid(wnd core.Window) core.View {
-	cols := 2
-	if wnd.Info().SizeClass < core.SizeClassLarge {
-		cols = 1
-	}
+func page(wnd core.Window) core.View {
+	return ui.VStack(
+		typoStack(ui.DefaultFontName, gridDefault(wnd)),
+		typoStack(ui.MonoFontName, gridMono(wnd)),
+	).Gap(ui.L48).Alignment(ui.Leading)
+}
 
-	return ui.Grid(
+func typoStack(fontName ui.FontName, content core.View) ui.TStack {
+	return ui.VStack(
+		ui.VStack(
+			ui.Text(string(fontName)).Font(ui.HeadlineLarge),
+		).
+			Alignment(ui.Leading).
+			FullWidth().
+			Border(ui.Border{BottomWidth: ui.L1, BottomColor: ui.M5}).
+			Padding(ui.Padding{Top: ui.L32}),
+		content,
+	).Gap(ui.L24).Alignment(ui.Leading)
+}
+
+func gridDefault(wnd core.Window) core.View {
+	return typoGrid(wnd,
 		ui.GridCell(
 			ui.VStack(
 				ui.Text("Display Large").Font(ui.DisplayLarge),
@@ -57,6 +72,11 @@ func grid(wnd core.Window) core.View {
 				ui.Text("Body Small: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.").Font(ui.BodySmall),
 			).Gap(ui.L8).Alignment(ui.TopLeading),
 		),
+	)
+}
+
+func gridMono(wnd core.Window) core.View {
+	return typoGrid(wnd,
 		ui.GridCell(
 			ui.VStack(
 				ui.Text("Mono Large: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.").Font(ui.MonoLarge),
@@ -78,5 +98,14 @@ func grid(wnd core.Window) core.View {
 				ui.Text("Mono Italic Small: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.").Font(ui.MonoItalicSmall),
 			).Gap(ui.L8).Alignment(ui.TopLeading),
 		),
-	).Columns(cols).Gap(ui.L64).Heights("auto").FullWidth()
+	)
+}
+
+func typoGrid(wnd core.Window, cells ...ui.TGridCell) ui.TGrid {
+	cols := 2
+	if wnd.Info().SizeClass < core.SizeClassLarge {
+		cols = 1
+	}
+
+	return ui.Grid(cells...).Columns(cols).Gap(ui.L64).Heights("auto").FullWidth()
 }
