@@ -144,5 +144,7 @@ func Content(wnd core.Window) core.View {
 
 func getRandomAlertContent() AlertContent {
 	index := rand.Intn(len(messages))
-	return messages[index]
+	msg := messages[index]
+	msg.message = fmt.Sprintf("%s\n(id: %d)", msg.message, rand.Intn(999999999))
+	return msg
 }
