@@ -22,7 +22,7 @@ var messages = []AlertContent{
 	},
 	{
 		title:   "Achtung, Explosionsgefahr!",
-		message: "Alle Geräte mit MacOS Version 26.4.0 sind betroffen. Wiederholt schnelles Auf- und Zuklappen des Gerätes kann zu heftigen Explosionen führen.",
+		message: "Alle Geräte ab MacOS Version 26.4.0 sind betroffen. Wiederholt schnelles Auf- und Zuklappen des Gerätes kann zu heftigen Explosionen führen.",
 	},
 	{
 		title:   "Miau?",
