@@ -4,6 +4,7 @@ import (
 	"github.com/worldiety/nago-demo/layout"
 	"github.com/worldiety/nago-demo/pages"
 	"github.com/worldiety/nago-demo/pages/content/accordion"
+	"github.com/worldiety/nago-demo/pages/content/alert"
 	"github.com/worldiety/nago-demo/pages/content/dialog"
 	"github.com/worldiety/nago-demo/pages/content/switcher"
 	"go.wdy.de/nago/presentation/ui/dropdown"
@@ -16,6 +17,10 @@ var categoryOptions = []dropdown.Option[string]{
 	{
 		Value: "accordion",
 		Label: "Akkordeon",
+	},
+	{
+		Value: "alert",
+		Label: "Alert",
 	},
 	{
 		Value: "dialog",
@@ -59,6 +64,8 @@ func pageContent(wnd core.Window, page string) core.View {
 	switch page {
 	case "accordion":
 		return accordion.Content(wnd)
+	case "alert":
+		return alert.Content(wnd)
 	case "dialog":
 		return dialog.Content(wnd)
 	case "switcher":
