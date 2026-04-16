@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/worldiety/option v0.0.0-20251007074526-863facc0bc83
-	go.wdy.de/nago v0.0.0-20260409073205-bbd49e164f13
+	go.wdy.de/nago v0.0.0-20260414061839-86ecc8679b18
 )
 
 require (
