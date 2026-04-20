@@ -16,7 +16,7 @@ func Content(_ core.Window) core.View {
 		gridBar(),
 		gridLine(),
 		gridPie(),
-	).Gap(ui.L32).FullWidth().NoClip(true)
+	).Gap(ui.L48).FullWidth().NoClip(true)
 }
 
 func gridBar() core.View {
@@ -284,6 +284,6 @@ func chartVariant(title string, barChart core.View) core.View {
 func grid(title string, cells ...ui.TGridCell) core.View {
 	return ui.VStack(
 		ui.Text(title).Font(ui.HeadlineSmall),
-		ui.Grid(cells...).Columns(3).Gap(ui.L32),
-	).Alignment(ui.Top).Gap(ui.L16).NoClip(true)
+		ui.Grid(cells...).Columns(3).Gap(ui.L32).FullWidth(),
+	).Alignment(ui.Top).Gap(ui.L16).NoClip(true).FullWidth()
 }
