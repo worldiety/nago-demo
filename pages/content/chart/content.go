@@ -71,8 +71,18 @@ func gridBar() core.View {
 		{
 			Label:          "Marker ohne Bedeutung",
 			SeriesIndex:    1,
+			DataPointIndex: 0,
+			Value:          "250",
+		},
+		{
+			Label:          "Runder Marker mit benutzerdefinierter Farbe",
+			SeriesIndex:    1,
 			DataPointIndex: 2,
-			Value:          "600",
+			Value:          "550",
+			Color:          ui.SE0,
+			Width:          10,
+			Height:         10,
+			Round:          true,
 		},
 	}
 
