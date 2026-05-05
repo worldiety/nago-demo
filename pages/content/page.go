@@ -7,6 +7,7 @@ import (
 	"github.com/worldiety/nago-demo/pages/content/alert"
 	"github.com/worldiety/nago-demo/pages/content/chart"
 	"github.com/worldiety/nago-demo/pages/content/dialog"
+	"github.com/worldiety/nago-demo/pages/content/flowchart"
 	"github.com/worldiety/nago-demo/pages/content/switcher"
 	"go.wdy.de/nago/presentation/ui/dropdown"
 
@@ -30,6 +31,10 @@ var categoryOptions = []dropdown.Option[string]{
 	{
 		Value: "dialog",
 		Label: "Dialog",
+	},
+	{
+		Value: "flowchart",
+		Label: "Flussdiagramm",
 	},
 	{
 		Value: "switcher",
@@ -75,6 +80,8 @@ func pageContent(wnd core.Window, page string) core.View {
 		return chart.Content(wnd)
 	case "dialog":
 		return dialog.Content(wnd)
+	case "flowchart":
+		flowchart.Content(wnd)
 	case "switcher":
 		return switcher.Content(wnd)
 	}
