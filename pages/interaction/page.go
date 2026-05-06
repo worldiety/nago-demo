@@ -1,6 +1,8 @@
 package interaction
 
 import (
+	"fmt"
+
 	"github.com/worldiety/nago-demo/layout"
 	"github.com/worldiety/nago-demo/pages"
 	"github.com/worldiety/nago-demo/pages/interaction/buttons"
@@ -51,7 +53,7 @@ func pageContent(wnd core.Window, page string) core.View {
 		return buttons.Content(wnd)
 	}
 
-	return ui.HStack()
+	return ui.HStack(ui.Text(fmt.Sprintf("unknown category '%s'", page)))
 }
 
 func getDefaultCategory() string {

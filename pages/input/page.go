@@ -1,6 +1,8 @@
 package input
 
 import (
+	"fmt"
+
 	"github.com/worldiety/nago-demo/layout"
 	"github.com/worldiety/nago-demo/pages"
 	boolInput "github.com/worldiety/nago-demo/pages/input/bool"
@@ -72,7 +74,7 @@ func pageContent(wnd core.Window, page string) core.View {
 		return text.Content(wnd)
 	}
 
-	return ui.HStack()
+	return ui.HStack(ui.Text(fmt.Sprintf("unknown category '%s'", page)))
 }
 
 func getDefaultCategory() string {

@@ -110,11 +110,14 @@ func Content(wnd core.Window) core.View {
 			NodesConnectable(true).
 			ElementsSelectable(true).
 			BackgroundColor(ui.M1).
-			Frame(ui.Frame{}.MatchScreen()).
+			Frame(ui.Frame{}.FullWidth().FullHeight()).
 			Layout(flowchart.FlowChartLayoutVertical).
 			CustomContents(personContents).
-			MaxZoom(1.5),
-	).Frame(ui.Frame{}.MatchScreen())
+			MaxZoom(1.5).
+			BackgroundColor(ui.M2.WithTransparency(65)),
+	).
+		Frame(ui.Frame{Height: ui.L560}.FullWidth()).
+		Border(ui.Border{}.Radius(ui.L14))
 }
 
 func personNode(id, name, title string, icon core.SVG, position flowchart.Point, nodeType flowchart.NodeType) (flowchart.Node, flowchart.CustomContent) {

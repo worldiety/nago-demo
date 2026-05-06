@@ -1,6 +1,8 @@
 package content
 
 import (
+	"fmt"
+
 	"github.com/worldiety/nago-demo/layout"
 	"github.com/worldiety/nago-demo/pages"
 	"github.com/worldiety/nago-demo/pages/content/accordion"
@@ -81,12 +83,12 @@ func pageContent(wnd core.Window, page string) core.View {
 	case "dialog":
 		return dialog.Content(wnd)
 	case "flowchart":
-		flowchart.Content(wnd)
+		return flowchart.Content(wnd)
 	case "switcher":
 		return switcher.Content(wnd)
 	}
 
-	return ui.HStack()
+	return ui.HStack(ui.Text(fmt.Sprintf("unknown category '%s'", page)))
 }
 
 func getDefaultCategory() string {
