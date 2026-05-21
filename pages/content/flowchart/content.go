@@ -2,9 +2,11 @@ package flowchart
 
 import (
 	_ "embed"
+	"fmt"
 
 	"go.wdy.de/nago/presentation/core"
 	"go.wdy.de/nago/presentation/ui"
+	"go.wdy.de/nago/presentation/ui/colorpicker"
 	"go.wdy.de/nago/presentation/ui/flowchart"
 )
 
@@ -15,50 +17,60 @@ var JoeSchmoeGreen core.SVG
 var JoeSchmoeRed core.SVG
 
 func Content(wnd core.Window) core.View {
-	personNodes := make([]flowchart.Node, 0)
-	personContents := make([]flowchart.CustomContent, 0)
+	nodes := make([]flowchart.Node, 0)
+	contents := make([]flowchart.CustomContent, 0)
+
+	colorState := core.StateOf[ui.Color](wnd, "colorState")
+	actionState := core.StateOf[flowchart.FlowChartActionData](wnd, "actionState")
 
 	jbusseNode, jbusseContent := personNode("jochen-busse", "Jochen Busse", "Geschäftsführer", JoeSchmoeGreen, flowchart.Point{
 		X: 100,
 		Y: -50,
 	}, flowchart.NodeTypeStart)
-	personNodes = append(personNodes, jbusseNode)
-	personContents = append(personContents, jbusseContent)
+	nodes = append(nodes, jbusseNode)
+	contents = append(contents, jbusseContent)
 
 	gkoesterNode, gkoesterContent := personNode("gabi-koester", "Gabi Köster", "Projektmanager", JoeSchmoeGreen, flowchart.Point{
 		X: -100,
 		Y: 100,
 	}, flowchart.NodeTypeDefault)
-	personNodes = append(personNodes, gkoesterNode)
-	personContents = append(personContents, gkoesterContent)
+	nodes = append(nodes, gkoesterNode)
+	contents = append(contents, gkoesterContent)
 
 	kpohlNode, kpohlContent := personNode("kalle-pohl", "Kalle Pohl", "Projektmanager", JoeSchmoeGreen, flowchart.Point{
 		X: 300,
 		Y: 100,
 	}, flowchart.NodeTypeDefault)
-	personNodes = append(personNodes, kpohlNode)
-	personContents = append(personContents, kpohlContent)
+	nodes = append(nodes, kpohlNode)
+	contents = append(contents, kpohlContent)
 
 	gcantzNode, gcantzContent := personNode("guido-cantz", "Guido Cantz", "Projektmanager", JoeSchmoeGreen, flowchart.Point{
 		X: 100,
 		Y: 100,
 	}, flowchart.NodeTypeDefault)
-	personNodes = append(personNodes, gcantzNode)
-	personContents = append(personContents, gcantzContent)
+	nodes = append(nodes, gcantzNode)
+	contents = append(contents, gcantzContent)
 
 	bstelterNode, bstelterContent := personNode("bernd-stelter", "Bernd Stelter", "Softwareentwickler", JoeSchmoeRed, flowchart.Point{
 		X: -100,
 		Y: 250,
 	}, flowchart.NodeTypeEnd)
-	personNodes = append(personNodes, bstelterNode)
-	personContents = append(personContents, bstelterContent)
+	nodes = append(nodes, bstelterNode)
+	contents = append(contents, bstelterContent)
 
 	gcantznichtNode, gcantznichtContent := personNode("guido-cantz-nicht", "Guido Cantz Nicht", "Praktikant", JoeSchmoeGreen, flowchart.Point{
 		X: 100,
 		Y: 250,
 	}, flowchart.NodeTypeEnd)
-	personNodes = append(personNodes, gcantznichtNode)
-	personContents = append(personContents, gcantznichtContent)
+	nodes = append(nodes, gcantznichtNode)
+	contents = append(contents, gcantznichtContent)
+
+	colorNode, colorContent := colorNode(colorState, "color", flowchart.Point{
+		X: 300,
+		Y: 250,
+	}, flowchart.NodeTypeDefault)
+	nodes = append(nodes, colorNode)
+	contents = append(contents, colorContent)
 
 	edges := []flowchart.Edge{
 		{
@@ -94,28 +106,38 @@ func Content(wnd core.Window) core.View {
 			SourceNodeID: "guido-cantz",
 			TargetNodeID: "guido-cantz-nicht",
 		},
+		{
+			ID:           "kpohl-color",
+			SourceNodeID: "kalle-pohl",
+			TargetNodeID: "color",
+			Style:        flowchart.EdgeStyleDotted,
+			Color:        ui.ColorSemanticGood,
+		},
 	}
 
 	state := core.AutoState[flowchart.Model](wnd).Init(func() flowchart.Model {
 		return flowchart.Model{
-			Nodes: personNodes,
+			Nodes: nodes,
 			Edges: edges,
 		}
 	})
 
-	return ui.Stack(
+	return ui.VStack(
 		flowchart.FlowChart(state.Get()).
 			InputValue(state).
+			ActionValue(actionState).
 			NodesDraggable(true).
 			NodesConnectable(true).
 			ElementsSelectable(true).
 			BackgroundColor(ui.M1).
 			Frame(ui.Frame{}.FullWidth().FullHeight()).
 			Layout(flowchart.FlowChartLayoutVertical).
-			CustomContents(personContents).
+			CustomContents(contents).
 			MaxZoom(1.5).
 			BackgroundColor(ui.M2.WithTransparency(65)),
+		lastAction(actionState),
 	).
+		Gap(ui.L8).
 		Frame(ui.Frame{Height: ui.L560}.FullWidth()).
 		Border(ui.Border{}.Radius(ui.L14))
 }
@@ -137,4 +159,50 @@ func personNode(id, name, title string, icon core.SVG, position flowchart.Point,
 				),
 			).Gap(ui.L4).Padding(ui.Padding{}.All(ui.L8)),
 		}
+}
+
+func colorNode(state *core.State[ui.Color], id string, position flowchart.Point, nodeType flowchart.NodeType) (flowchart.Node, flowchart.CustomContent) {
+	return flowchart.Node{
+			ID:       id,
+			Position: position,
+			Type:     nodeType,
+			Style:    flowchart.NodeStyleNone,
+		},
+		flowchart.CustomContent{
+			NodeID: id,
+			Content: ui.VStack(
+				colorpicker.PalettePicker("Farbe", colorpicker.DefaultPalette).Value(state.Get()).State(state),
+			).Gap(ui.L4).BackgroundColor(state.Get().WithTransparency(50)).Padding(ui.Padding{}.All(ui.L8)).Border(ui.Border{}.Radius(ui.L8)),
+		}
+}
+
+func lastAction(state *core.State[flowchart.FlowChartActionData]) core.View {
+	actionData := state.Get()
+
+	return ui.Stack(
+		ui.Grid(
+			ui.GridCell(ui.Text("Node:")),
+			ui.GridCell(ui.IfElse(len(actionData.Node.ID) > 0, ui.Text(fmt.Sprintf("%+v", actionData.Node)), ui.Text("-"))),
+			ui.GridCell(ui.Text("Edge:")),
+			ui.GridCell(ui.IfElse(len(actionData.Edge.ID) > 0, ui.Text(fmt.Sprintf("%+v", actionData.Edge)), ui.Text("-"))),
+			ui.GridCell(ui.Text("Point:")),
+			ui.GridCell(ui.Text(fmt.Sprintf("%d %d", int(actionData.ViewX), int(actionData.ViewY)))),
+			ui.GridCell(ui.Text("Selected nodes:")),
+			ui.GridCell(ui.Text(fmt.Sprintf("%+v", actionData.SelectedNodes))),
+			ui.GridCell(ui.Text("Selected edges:")),
+			ui.GridCell(ui.Text(fmt.Sprintf("%+v", actionData.SelectedEdges))),
+		).
+			Columns(2).
+			RowGap(ui.L2).
+			ColGap(ui.L8).
+			Widths("auto", "auto"),
+	).
+		Position(ui.Position{
+			Type:   ui.PositionFixed,
+			Left:   ui.L0,
+			Bottom: ui.L0,
+		}).
+		BackgroundColor(ui.ColorBackground.WithTransparency(10)).
+		Font(ui.MonoSmall).
+		Padding(ui.Padding{}.All(ui.L8))
 }
