@@ -129,12 +129,14 @@ func Content(wnd core.Window) core.View {
 			NodesDraggable(true).
 			NodesConnectable(true).
 			ElementsSelectable(true).
-			BackgroundColor(ui.M1).
+			Background(flowchart.Background{
+				Color:   ui.M2.WithTransparency(65),
+				GridGap: 20,
+			}).
 			Frame(ui.Frame{}.FullWidth().FullHeight()).
 			Layout(flowchart.FlowChartLayoutVertical).
 			CustomContents(contents).
-			MaxZoom(1.5).
-			BackgroundColor(ui.M2.WithTransparency(65)),
+			MaxZoom(1.5),
 		lastAction(actionState),
 	).
 		Gap(ui.L8).
@@ -185,7 +187,9 @@ func lastAction(state *core.State[flowchart.FlowChartActionData]) core.View {
 			ui.GridCell(ui.IfElse(len(actionData.Node.ID) > 0, ui.Text(fmt.Sprintf("%+v", actionData.Node)), ui.Text("-"))),
 			ui.GridCell(ui.Text("Edge:")),
 			ui.GridCell(ui.IfElse(len(actionData.Edge.ID) > 0, ui.Text(fmt.Sprintf("%+v", actionData.Edge)), ui.Text("-"))),
-			ui.GridCell(ui.Text("Point:")),
+			ui.GridCell(ui.Text("Pane Point:")),
+			ui.GridCell(ui.Text(fmt.Sprintf("%d %d", int(actionData.PaneX), int(actionData.PaneY)))),
+			ui.GridCell(ui.Text("View Point:")),
 			ui.GridCell(ui.Text(fmt.Sprintf("%d %d", int(actionData.ViewX), int(actionData.ViewY)))),
 			ui.GridCell(ui.Text("Selected nodes:")),
 			ui.GridCell(ui.Text(fmt.Sprintf("%+v", actionData.SelectedNodes))),
