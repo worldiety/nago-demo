@@ -20,6 +20,7 @@ jobs:
 
       - name: Build go-binary
         run: |
+          set -e
           GOOS=linux GOARCH=amd64 go build -o srv github.com/worldiety/nago-demo/cmd/nago-demo-srv
 
       - name: Upload site via curl
