@@ -83,7 +83,7 @@ func variant(title string, content core.View) core.View {
 
 func controls(state *core.State[int], stepCount int) core.View {
 	nextText := "Weiter >"
-	if state.Get() >= stepCount {
+	if state.Get() >= stepCount-1 {
 		nextText = "Fertig >"
 	}
 
