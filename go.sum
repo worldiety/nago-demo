@@ -26,6 +26,7 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rogpeppe/go-internal v1.14.1 h1:UQB4HGPB6osV0SQTLymcB4TgvyWu6ZyliaW0tI/otEQ=
 github.com/rogpeppe/go-internal v1.14.1/go.mod h1:MaRKkUm5W0goXpeCfT7UZI6fk/L7L7so1lCWt35ZSgc=
+github.com/stretchr/testify v1.4.0 h1:2E4SXV/wtOkTonXsotYi4li6zVWxYlZuYNCXe9XRJyk=
 github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U=
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/tidwall/btree v1.8.1 h1:27ehoXvm5AG/g+1VxLS1SD3vRhp/H7LuEfwNvddEdmA=
@@ -80,6 +81,8 @@ go.wdy.de/nago v0.0.0-20260611074218-d2c95c1eb0fc h1:tMefJNLdbRqZPCsgFFAcmMMlMDt
 go.wdy.de/nago v0.0.0-20260611074218-d2c95c1eb0fc/go.mod h1:v9urciu8ndemiINxsnO+VWOuUz79+PfhJyemiznk1os=
 go.wdy.de/nago v0.0.0-20260611114014-b9611a621f34 h1:oXeSE++M/N+IHS5Diib2M9nddASfUleop143aQGIYfQ=
 go.wdy.de/nago v0.0.0-20260611114014-b9611a621f34/go.mod h1:v9urciu8ndemiINxsnO+VWOuUz79+PfhJyemiznk1os=
+go.wdy.de/nago v0.0.0-20260619100639-d7f674a4eed3 h1:Fwr9AjBfdZQ8N8RWzU+2M+iTqshhIor5Y0+NNJfVyR4=
+go.wdy.de/nago v0.0.0-20260619100639-d7f674a4eed3/go.mod h1:AjXi+tBBl0B+MK1fgQSKXhVDj75TU0pWZ2RPufmev2Q=
 golang.org/x/crypto v0.45.0 h1:jMBrvKuj23MTlT0bQEOBcAE0mjg8mK9RXFhRH6nyF3Q=
 golang.org/x/crypto v0.45.0/go.mod h1:XTGrrkGJve7CYK7J8PEww4aY7gM3qMCElcJQ8n8JdX4=
 golang.org/x/crypto v0.49.0 h1:+Ng2ULVvLHnJ/ZFEq4KdcDd/cfjrrjjNSXNzxg0Y4U4=

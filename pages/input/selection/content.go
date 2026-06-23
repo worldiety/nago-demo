@@ -31,8 +31,11 @@ func Content(wnd core.Window) core.View {
 
 	return ui.Grid(
 		ui.GridCell(tableRadio(wnd)),
-		ui.GridCell(tableDropdown(wnd)),
 		ui.GridCell(tablePicker(wnd)),
+		ui.GridCell(tableDropdown(wnd)),
+		ui.GridCell(tableDropdownReduced(wnd)),
+		ui.GridCell(tableDropdownORA(wnd)),
+		ui.GridCell(tableDropdownORAReduced(wnd)),
 		ui.GridCell(tableColor(wnd)),
 	).Columns(cols).Gap(ui.L32).FullWidth().Heights("auto")
 }
@@ -106,6 +109,179 @@ func tableDropdown(wnd core.Window) core.View {
 		layout.ComponentValueTableRow{
 			Component: dropdown.Dropdown("Disabled", selectOptions, stateDropdownDisabled.Get()).
 				InputValue(stateDropdownDisabled).
+				Disabled(true),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDisabled.Get()),
+		},
+	)
+}
+
+func tableDropdownReduced(wnd core.Window) core.View {
+	selectOptions := make([]dropdown.Option[ID], 0, len(names))
+	for i, name := range names {
+		selectOptions = append(selectOptions, dropdown.Option[ID]{
+			Label:    name,
+			Value:    ID(name),
+			Disabled: i == 0,
+		})
+	}
+
+	stateDropdownDefault := core.StateOf[ID](wnd, "stateDropdownReducedDefault")
+	stateDropdownIconLeft := core.StateOf[ID](wnd, "stateDropdownReducedIconLeft")
+	stateDropdownSupport := core.StateOf[ID](wnd, "stateDropdownReducedSupport")
+	stateDropdownError := core.StateOf[ID](wnd, "stateDropdownReducedError")
+	stateDropdownDisabled := core.StateOf[ID](wnd, "stateDropdownReducedDisabled")
+
+	stateDropdownDisabled.Set(ID(names[1]))
+
+	return table("Dropdown (reduziert)",
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Standard", selectOptions, stateDropdownDefault.Get()).
+				InputValue(stateDropdownDefault).Style(ui.TextFieldReduced),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDefault.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Icon links", selectOptions, stateDropdownIconLeft.Get()).
+				InputValue(stateDropdownIconLeft).Style(ui.TextFieldReduced).
+				Leading(ui.ImageIcon(icons.FaceSmile)),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownIconLeft.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Support", selectOptions, stateDropdownSupport.Get()).
+				InputValue(stateDropdownSupport).Style(ui.TextFieldReduced).
+				SupportingText("Hier steht ein Support-Text"),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownSupport.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Fehler", selectOptions, stateDropdownError.Get()).
+				InputValue(stateDropdownError).Style(ui.TextFieldReduced).
+				ErrorText("Hier steht ein Fehler-Text"),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownError.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Disabled", selectOptions, stateDropdownDisabled.Get()).
+				InputValue(stateDropdownDisabled).Style(ui.TextFieldReduced).
+				Disabled(true),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDisabled.Get()),
+		},
+	)
+}
+
+func tableDropdownORA(wnd core.Window) core.View {
+	selectOptions := make([]dropdown.Option[ID], 0, len(names))
+	for i, name := range names {
+		selectOptions = append(selectOptions, dropdown.Option[ID]{
+			Label:    name,
+			Value:    ID(name),
+			Disabled: i == 0,
+		})
+	}
+
+	stateDropdownDefault := core.StateOf[ID](wnd, "stateDropdownORADefault")
+	stateDropdownIconLeft := core.StateOf[ID](wnd, "stateDropdownORAIconLeft")
+	stateDropdownSupport := core.StateOf[ID](wnd, "stateDropdownORASupport")
+	stateDropdownError := core.StateOf[ID](wnd, "stateDropdownORAError")
+	stateDropdownDisabled := core.StateOf[ID](wnd, "stateDropdownORADisabled")
+
+	stateDropdownDisabled.Set(ID(names[1]))
+
+	return table("Dropdown ORA",
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Standard", selectOptions, stateDropdownDefault.Get()).
+				InputValue(stateDropdownDefault).StyledDropdown(true),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDefault.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Icon links", selectOptions, stateDropdownIconLeft.Get()).
+				InputValue(stateDropdownIconLeft).StyledDropdown(true).
+				Leading(ui.ImageIcon(icons.FaceSmile)),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownIconLeft.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Mit Suche", selectOptions, stateDropdownDefault.Get()).
+				InputValue(stateDropdownDefault).StyledDropdown(true).Searchable(true),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDefault.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Mit Dropdown-Info", selectOptions, stateDropdownDefault.Get()).
+				InputValue(stateDropdownDefault).StyledDropdown(true).DropdownInfo("Schmoe wählen"),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDefault.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Support", selectOptions, stateDropdownSupport.Get()).
+				InputValue(stateDropdownSupport).StyledDropdown(true).
+				SupportingText("Hier steht ein Support-Text"),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownSupport.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Fehler", selectOptions, stateDropdownError.Get()).
+				InputValue(stateDropdownError).StyledDropdown(true).
+				ErrorText("Hier steht ein Fehler-Text"),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownError.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Disabled", selectOptions, stateDropdownDisabled.Get()).
+				InputValue(stateDropdownDisabled).StyledDropdown(true).
+				Disabled(true),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDisabled.Get()),
+		},
+	)
+}
+
+func tableDropdownORAReduced(wnd core.Window) core.View {
+	selectOptions := make([]dropdown.Option[ID], 0, len(names))
+	for i, name := range names {
+		selectOptions = append(selectOptions, dropdown.Option[ID]{
+			Label:    name,
+			Value:    ID(name),
+			Disabled: i == 0,
+		})
+	}
+
+	stateDropdownDefault := core.StateOf[ID](wnd, "stateDropdownORAReducedDefault")
+	stateDropdownIconLeft := core.StateOf[ID](wnd, "stateDropdownORAReducedIconLeft")
+	stateDropdownSupport := core.StateOf[ID](wnd, "stateDropdownORAReducedSupport")
+	stateDropdownError := core.StateOf[ID](wnd, "stateDropdownORAReducedError")
+	stateDropdownDisabled := core.StateOf[ID](wnd, "stateDropdownORAReducedDisabled")
+
+	stateDropdownDisabled.Set(ID(names[1]))
+
+	return table("Dropdown ORA (reduziert)",
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Standard", selectOptions, stateDropdownDefault.Get()).
+				InputValue(stateDropdownDefault).StyledDropdown(true).Style(ui.TextFieldReduced),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDefault.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Icon links", selectOptions, stateDropdownIconLeft.Get()).
+				InputValue(stateDropdownIconLeft).StyledDropdown(true).Style(ui.TextFieldReduced).
+				Leading(ui.ImageIcon(icons.FaceSmile)),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownIconLeft.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Mit Suche", selectOptions, stateDropdownDefault.Get()).
+				InputValue(stateDropdownDefault).StyledDropdown(true).Style(ui.TextFieldReduced).Searchable(true),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDefault.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Mit Dropdown-Info", selectOptions, stateDropdownDefault.Get()).
+				InputValue(stateDropdownDefault).StyledDropdown(true).Style(ui.TextFieldReduced).DropdownInfo("Schmoe wählen"),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDefault.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Support", selectOptions, stateDropdownSupport.Get()).
+				InputValue(stateDropdownSupport).StyledDropdown(true).Style(ui.TextFieldReduced).
+				SupportingText("Hier steht ein Support-Text"),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownSupport.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Fehler", selectOptions, stateDropdownError.Get()).
+				InputValue(stateDropdownError).StyledDropdown(true).Style(ui.TextFieldReduced).
+				ErrorText("Hier steht ein Fehler-Text"),
+			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownError.Get()),
+		},
+		layout.ComponentValueTableRow{
+			Component: dropdown.Dropdown("Disabled", selectOptions, stateDropdownDisabled.Get()).
+				InputValue(stateDropdownDisabled).StyledDropdown(true).Style(ui.TextFieldReduced).
 				Disabled(true),
 			Value: getOptionLabelFromSelectOptions(selectOptions, stateDropdownDisabled.Get()),
 		},
