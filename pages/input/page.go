@@ -8,6 +8,7 @@ import (
 	boolInput "github.com/worldiety/nago-demo/pages/input/bool"
 	"github.com/worldiety/nago-demo/pages/input/datetime"
 	"github.com/worldiety/nago-demo/pages/input/selection"
+	"github.com/worldiety/nago-demo/pages/input/slider"
 	"github.com/worldiety/nago-demo/pages/input/text"
 	"go.wdy.de/nago/presentation/ui/dropdown"
 
@@ -27,6 +28,10 @@ var categoryOptions = []dropdown.Option[string]{
 	{
 		Value: "selection",
 		Label: "Auswahl",
+	},
+	{
+		Value: "slider",
+		Label: "Slider",
 	},
 	{
 		Value: "text",
@@ -70,6 +75,8 @@ func pageContent(wnd core.Window, page string) core.View {
 		return datetime.Content(wnd)
 	case "selection":
 		return selection.Content(wnd)
+	case "slider":
+		return slider.Content(wnd)
 	case "text":
 		return text.Content(wnd)
 	}
