@@ -60,11 +60,12 @@ func create() *application.Application {
 						Padding(ui.Padding{}.Vertical(ui.L32)).
 						Border(ui.Border{TopWidth: ui.L1, TopColor: ui.M5}),
 				).
+				MenuEntry().Custom(themeSwitcherMenuEntry()).OneOfRole().
 				MenuEntry().Title("Eingabe").Icon(flowbiteOutline.Keyboard).Forward("input").OneOfRole().
 				MenuEntry().Title("Inhalt").Icon(flowbiteOutline.Image).Forward("content").OneOfRole().
 				MenuEntry().Title("Interaktion").Icon(heroOutline.CursorArrowRays).Forward("interaction").OneOfRole().
 				MenuEntry().Title("Typografie").Icon(flowbiteOutline.TextSize).Forward("typography").OneOfRole().
-				MenuEntry().Dynamic(darkModeToggleMenuEntry()).Decorator(),
+				Decorator(),
 		)
 
 		cfg.RootViewWithDecoration(".", func(wnd core.Window) core.View {
@@ -86,22 +87,16 @@ func create() *application.Application {
 	})
 }
 
-func darkModeToggleMenuEntry() func(wnd core.Window, entry *application.MenuEntryBuilder) {
-	return func(wnd core.Window, entry *application.MenuEntryBuilder) {
-		if wnd.Info().ColorScheme == core.Light {
-			entry.Title("Dark Mode")
-			entry.Icon(flowbiteOutline.Moon)
-			entry.Action(func(wnd core.Window) {
-				wnd.SetColorScheme(core.Dark)
-			})
-		} else {
-			entry.Title("Light Mode")
-			entry.Icon(flowbiteOutline.Sun)
-			entry.Action(func(wnd core.Window) {
-				wnd.SetColorScheme(core.Light)
-			})
+func themeSwitcherMenuEntry() core.View {
+	return ui.HStack().Responsive(func(wnd core.Window, stack ui.TStack) ui.TStack {
+		if wnd.Info().SizeClass >= core.SizeClassMedium {
+			return stack.Append(
+				ui.ThemeSwitcher(ui.SecondaryButton(nil).Title("Farbschema wechseln")),
+			).WithPadding(ui.Padding{Right: ui.L32})
 		}
-	}
+
+		return stack
+	})
 }
 
 func versionsView() core.View {

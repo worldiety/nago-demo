@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/worldiety/option v0.0.0-20251007074526-863facc0bc83
-	go.wdy.de/nago v0.0.0-20260624124521-64c81928e375
+	go.wdy.de/nago v0.0.0-20260712131501-44bb9f05bbce
 )
 
 require (
@@ -13,6 +13,7 @@ require (
 	github.com/google/btree v1.1.3 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
+	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/laher/mergefs v0.1.1 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/tidwall/btree v1.8.1 // indirect
