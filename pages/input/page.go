@@ -8,6 +8,7 @@ import (
 	boolInput "github.com/worldiety/nago-demo/pages/input/bool"
 	"github.com/worldiety/nago-demo/pages/input/datetime"
 	"github.com/worldiety/nago-demo/pages/input/selection"
+	"github.com/worldiety/nago-demo/pages/input/signature"
 	"github.com/worldiety/nago-demo/pages/input/slider"
 	"github.com/worldiety/nago-demo/pages/input/text"
 	"go.wdy.de/nago/presentation/ui/dropdown"
@@ -18,6 +19,10 @@ import (
 
 var categoryOptions = []dropdown.Option[string]{
 	{
+		Value: "selection",
+		Label: "Auswahl",
+	},
+	{
 		Value: "bool",
 		Label: "Bool'sche Werte",
 	},
@@ -26,16 +31,16 @@ var categoryOptions = []dropdown.Option[string]{
 		Label: "Datum/Zeit",
 	},
 	{
-		Value: "selection",
-		Label: "Auswahl",
-	},
-	{
 		Value: "slider",
 		Label: "Slider",
 	},
 	{
 		Value: "text",
 		Label: "Text",
+	},
+	{
+		Value: "signature",
+		Label: "Unterschrift",
 	},
 }
 
@@ -48,14 +53,14 @@ func Page(wnd core.Window) core.View {
 }
 
 func page(wnd core.Window) core.View {
-	stateCategory := core.StateOf[string](wnd, "stateCategory")
+	stateCategory := core.StateOf[string](wnd, "stateCategory").Init(func() string {
+		fromQuery, ok := getCategoryQuery(wnd)
+		if ok {
+			return fromQuery
+		}
 
-	fromQuery, ok := getCategoryQuery(wnd)
-	if ok {
-		stateCategory.Set(fromQuery)
-	} else {
-		stateCategory.Set(categoryOptions[0].Value)
-	}
+		return categoryOptions[0].Value
+	})
 
 	stateCategory.Observe(func(cat string) {
 		setCategoryQuery(wnd, cat)
@@ -75,6 +80,8 @@ func pageContent(wnd core.Window, page string) core.View {
 		return datetime.Content(wnd)
 	case "selection":
 		return selection.Content(wnd)
+	case "signature":
+		return signature.Content(wnd)
 	case "slider":
 		return slider.Content(wnd)
 	case "text":
@@ -98,6 +105,6 @@ func setCategoryQuery(wnd core.Window, page string) {
 	if (!ok && page != getDefaultCategory()) || (ok && page != val) {
 		values := wnd.Values()
 		values = values.Put("category", page)
-		wnd.Navigation().ForwardTo(wnd.Path(), values)
+		wnd.Navigation().Replace(wnd.Path(), values)
 	}
 }

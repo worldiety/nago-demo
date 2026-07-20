@@ -28,14 +28,14 @@ func Page(wnd core.Window) core.View {
 }
 
 func page(wnd core.Window) core.View {
-	stateCategory := core.StateOf[string](wnd, "stateCategory")
+	stateCategory := core.StateOf[string](wnd, "stateCategory").Init(func() string {
+		fromQuery, ok := getCategoryQuery(wnd)
+		if ok {
+			return fromQuery
+		}
 
-	fromQuery, ok := getCategoryQuery(wnd)
-	if ok {
-		stateCategory.Set(fromQuery)
-	} else {
-		stateCategory.Set(categoryOptions[0].Value)
-	}
+		return categoryOptions[0].Value
+	})
 
 	stateCategory.Observe(func(cat string) {
 		setCategoryQuery(wnd, cat)
@@ -70,6 +70,6 @@ func setCategoryQuery(wnd core.Window, page string) {
 	if (!ok && page != getDefaultCategory()) || (ok && page != val) {
 		values := wnd.Values()
 		values = values.Put("category", page)
-		wnd.Navigation().ForwardTo(wnd.Path(), values)
+		wnd.Navigation().Replace(wnd.Path(), values)
 	}
 }
