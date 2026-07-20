@@ -8,6 +8,7 @@ import (
 	"github.com/worldiety/nago-demo/pages/content/accordion"
 	"github.com/worldiety/nago-demo/pages/content/alert"
 	"github.com/worldiety/nago-demo/pages/content/chart"
+	"github.com/worldiety/nago-demo/pages/content/dataview"
 	"github.com/worldiety/nago-demo/pages/content/dialog"
 	"github.com/worldiety/nago-demo/pages/content/flowchart"
 	"github.com/worldiety/nago-demo/pages/content/pdf"
@@ -27,6 +28,10 @@ var categoryOptions = []dropdown.Option[string]{
 	{
 		Value: "alert",
 		Label: "Alert",
+	},
+	{
+		Value: "dataview",
+		Label: "Daten-Tabelle",
 	},
 	{
 		Value: "chart",
@@ -90,6 +95,8 @@ func pageContent(wnd core.Window, page string) core.View {
 		return alert.Content(wnd)
 	case "chart":
 		return chart.Content(wnd)
+	case "dataview":
+		return dataview.Content(wnd)
 	case "dialog":
 		return dialog.Content(wnd)
 	case "flowchart":
