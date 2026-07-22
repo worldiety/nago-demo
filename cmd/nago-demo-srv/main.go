@@ -33,7 +33,7 @@ var heroBg application.StaticBytes
 func create() *application.Application {
 	return application.Configure(func(cfg *application.Configurator) {
 		cfg.SetApplicationID("de.worldiety.nago_test")
-		cfg.SetName("NAGO-Demo-App")
+		cfg.SetName("NAGO Demo-App")
 		cfg.Serve(vuejs.Dist())
 
 		option.MustZero(cfg.StandardSystems())
