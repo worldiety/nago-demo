@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/worldiety/nago-demo/pages/content"
+	"github.com/worldiety/nago-demo/pages/content/hero"
 	"github.com/worldiety/nago-demo/pages/home"
 	"github.com/worldiety/nago-demo/pages/input"
 	"github.com/worldiety/nago-demo/pages/interaction"
@@ -24,10 +25,10 @@ import (
 	"go.wdy.de/nago/web/vuejs"
 )
 
-//go:embed nago_logo.svg
+//go:embed static/nago_logo.svg
 var appIcon application.StaticBytes
 
-//go:embed hero_bg.jpg
+//go:embed static/hero_bg.jpg
 var heroBg application.StaticBytes
 
 func create() *application.Application {
@@ -72,15 +73,17 @@ func create() *application.Application {
 		)
 
 		heroBgUrl := cfg.Resource(heroBg)
+
 		cfg.RootViewWithDecoration(".", func(wnd core.Window) core.View {
 			return home.Page(wnd, heroBgUrl)
 		})
-
 		cfg.RootViewWithDecoration("input", func(wnd core.Window) core.View {
 			return input.Page(wnd)
 		})
 		cfg.RootViewWithDecoration("content", func(wnd core.Window) core.View {
-			return content.Page(wnd)
+			return content.Page(wnd, content.ContentContext{
+				Hero: hero.ContentHeroContext{BgURI: heroBgUrl},
+			})
 		})
 		cfg.RootViewWithDecoration("interaction", func(wnd core.Window) core.View {
 			return interaction.Page(wnd)

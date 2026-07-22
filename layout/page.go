@@ -5,7 +5,12 @@ import (
 	"go.wdy.de/nago/presentation/ui"
 )
 
-func Page(_ core.Window, title, subtitle string, view core.View) core.View {
+func Page(_ core.Window, wide bool, title, subtitle string, view core.View) core.View {
+	contentWidth := ui.L1200
+	if wide {
+		contentWidth = ui.L1600
+	}
+
 	return ui.VStack(
 		ui.If(len(title) > 0 || len(subtitle) > 0, ui.VStack(
 			ui.If(len(title) > 0, ui.Text(title).Font(ui.HeadlineLarge)),
@@ -14,5 +19,5 @@ func Page(_ core.Window, title, subtitle string, view core.View) core.View {
 		ui.VStack(
 			view,
 		).FullWidth(),
-	).Gap(ui.L32).FullWidth().Padding(ui.Padding{Top: ui.L32, Bottom: ui.L120}).Frame(ui.Frame{Width: ui.L1200, MaxWidth: ui.Full})
+	).Gap(ui.L32).FullWidth().Padding(ui.Padding{Top: ui.L32, Bottom: ui.L120}).Frame(ui.Frame{Width: contentWidth, MaxWidth: ui.Full})
 }

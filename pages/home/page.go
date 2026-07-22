@@ -15,7 +15,7 @@ import (
 var heroSide application.StaticBytes
 
 func Page(wnd core.Window, heroBgUrl core.URI) core.View {
-	return layout.Page(wnd, "", "",
+	return layout.Page(wnd, true, "", "",
 		ui.VStack(
 			hero.Hero("Willkommen in der NAGO Demo-App").
 				Subtitle("Teil der NAGO-Qualitätsoffensive").

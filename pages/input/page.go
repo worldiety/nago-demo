@@ -46,6 +46,7 @@ var categoryOptions = []dropdown.Option[string]{
 
 func Page(wnd core.Window) core.View {
 	return layout.Page(wnd,
+		false,
 		"",
 		"",
 		page(wnd),

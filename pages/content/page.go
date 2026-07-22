@@ -11,6 +11,7 @@ import (
 	"github.com/worldiety/nago-demo/pages/content/dataview"
 	"github.com/worldiety/nago-demo/pages/content/dialog"
 	"github.com/worldiety/nago-demo/pages/content/flowchart"
+	"github.com/worldiety/nago-demo/pages/content/hero"
 	"github.com/worldiety/nago-demo/pages/content/pdf"
 	"github.com/worldiety/nago-demo/pages/content/stepper"
 	"github.com/worldiety/nago-demo/pages/content/switcher"
@@ -20,6 +21,10 @@ import (
 	"go.wdy.de/nago/presentation/ui"
 )
 
+type ContentContext struct {
+	Hero hero.ContentHeroContext
+}
+
 var categoryOptions = []dropdown.Option[string]{
 	{
 		Value: "accordion",
@@ -28,6 +33,10 @@ var categoryOptions = []dropdown.Option[string]{
 	{
 		Value: "alert",
 		Label: "Alert",
+	},
+	{
+		Value: "hero",
+		Label: "Banner",
 	},
 	{
 		Value: "dataview",
@@ -59,15 +68,18 @@ var categoryOptions = []dropdown.Option[string]{
 	},
 }
 
-func Page(wnd core.Window) core.View {
+func Page(wnd core.Window, ctx ContentContext) core.View {
+	p, wide := page(wnd, ctx)
+
 	return layout.Page(wnd,
+		wide,
 		"",
 		"",
-		page(wnd),
+		p,
 	)
 }
 
-func page(wnd core.Window) core.View {
+func page(wnd core.Window, ctx ContentContext) (core.View, bool) {
 	stateCategory := core.StateOf[string](wnd, "stateCategory").Init(func() string {
 		fromQuery, ok := getCategoryQuery(wnd)
 		if ok {
@@ -83,11 +95,11 @@ func page(wnd core.Window) core.View {
 
 	return ui.VStack(
 		pages.HeaderWithSelectFilter("Inhalt", "Kategorie", categoryOptions, stateCategory),
-		pageContent(wnd, stateCategory.Get()),
-	).Gap(ui.L32).FullWidth()
+		pageContent(wnd, stateCategory.Get(), ctx),
+	).Gap(ui.L32).FullWidth(), stateCategory.Get() == "hero"
 }
 
-func pageContent(wnd core.Window, page string) core.View {
+func pageContent(wnd core.Window, page string, ctx ContentContext) core.View {
 	switch page {
 	case "accordion":
 		return accordion.Content(wnd)
@@ -101,6 +113,8 @@ func pageContent(wnd core.Window, page string) core.View {
 		return dialog.Content(wnd)
 	case "flowchart":
 		return flowchart.Content(wnd)
+	case "hero":
+		return hero.Content(wnd, ctx.Hero)
 	case "pdf":
 		return pdf.Content(wnd)
 	case "stepper":

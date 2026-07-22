@@ -9,6 +9,7 @@ import (
 
 func Page(wnd core.Window) core.View {
 	return layout.Page(wnd,
+		false,
 		"",
 		"",
 		page(wnd),
