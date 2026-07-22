@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/worldiety/option v0.0.0-20251007074526-863facc0bc83
-	go.wdy.de/nago v0.0.0-20260720133508-e6f1d1944be8
+	go.wdy.de/nago v0.0.0-20260722101646-df00698d4d1d
 )
 
 require (
@@ -12,6 +12,8 @@ require (
 	github.com/go-chi/cors v1.2.2 // indirect
 	github.com/google/btree v1.1.3 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
+	github.com/gosimple/slug v1.15.0 // indirect
+	github.com/gosimple/unidecode v1.0.1 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/laher/mergefs v0.1.1 // indirect
