@@ -3,7 +3,6 @@ package alert
 import (
 	"fmt"
 	"math/rand"
-	"time"
 
 	"go.wdy.de/nago/presentation/core"
 	"go.wdy.de/nago/presentation/ui"
@@ -79,6 +78,32 @@ func Content(wnd core.Window) core.View {
 		),
 		ui.GridCell(
 			ui.VStack(
+				ui.Text("Erfolg"),
+				ui.PrimaryButton(func() {
+					content := getRandomAlertContent()
+					alert.ShowBannerMessage(wnd, alert.Message{
+						Title:   content.title,
+						Message: content.message,
+						Intent:  alert.IntentSuccess,
+					})
+				}).Title("Alert anzeigen"),
+			),
+		),
+		ui.GridCell(
+			ui.VStack(
+				ui.Text("Warnung"),
+				ui.PrimaryButton(func() {
+					content := getRandomAlertContent()
+					alert.ShowBannerMessage(wnd, alert.Message{
+						Title:   content.title,
+						Message: content.message,
+						Intent:  alert.IntentWarning,
+					})
+				}).Title("Alert anzeigen"),
+			),
+		),
+		ui.GridCell(
+			ui.VStack(
 				ui.Text("Fehler"),
 				ui.PrimaryButton(func() {
 					content := getRandomAlertContent()
@@ -92,54 +117,13 @@ func Content(wnd core.Window) core.View {
 		),
 		ui.GridCell(
 			ui.VStack(
-				ui.Text("Standard (5 Minuten)"),
-				ui.PrimaryButton(func() {
-					content := getRandomAlertContent()
-					alert.ShowBannerMessage(wnd, alert.Message{
-						Title:    content.title,
-						Message:  content.message,
-						Duration: 5 * time.Minute,
-					})
-				}).Title("Alert anzeigen"),
-			),
-		),
-		ui.GridCell(
-			ui.VStack(
-				ui.Text("Okay (5 Minuten)"),
-				ui.PrimaryButton(func() {
-					content := getRandomAlertContent()
-					alert.ShowBannerMessage(wnd, alert.Message{
-						Title:    content.title,
-						Message:  content.message,
-						Intent:   alert.IntentOk,
-						Duration: 5 * time.Minute,
-					})
-				}).Title("Alert anzeigen"),
-			),
-		),
-		ui.GridCell(
-			ui.VStack(
-				ui.Text("Fehler (5 Minuten)"),
-				ui.PrimaryButton(func() {
-					content := getRandomAlertContent()
-					alert.ShowBannerMessage(wnd, alert.Message{
-						Title:    content.title,
-						Message:  content.message,
-						Intent:   alert.IntentError,
-						Duration: 5 * time.Minute,
-					})
-				}).Title("Alert anzeigen"),
-			),
-		),
-		ui.GridCell(
-			ui.VStack(
 				ui.Text("Technischer Fehler"),
 				ui.PrimaryButton(func() {
 					alert.ShowBannerError(wnd, fmt.Errorf("[abc123] Ich bin ein Fehler"))
 				}).Title("Alert anzeigen"),
 			),
 		),
-	).Columns(3).Gap(ui.L16)
+	).Columns(5).Gap(ui.L16).Padding(ui.Padding{}.Vertical(ui.L64))
 }
 
 func getRandomAlertContent() AlertContent {
