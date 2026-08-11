@@ -13,6 +13,9 @@ import (
 //go:embed accordion-content.gohtml
 var accordionContent string
 
+//go:embed accordion-content-small.gohtml
+var accordionContentSmall string
+
 func Content(wnd core.Window) core.View {
 	accordions := make([]core.View, 0)
 	for i := range 8 {
@@ -23,11 +26,25 @@ func Content(wnd core.Window) core.View {
 		).FullWidth())
 	}
 
+	accordionsSmall := make([]core.View, 0)
+	for i := range 8 {
+		accordionsSmall = append(accordionsSmall, accordion.Accordion(
+			ui.Text(fmt.Sprintf("Accordion (small) %d", i+1)).Font(ui.TitleMedium),
+			ui.RichText(fmt.Sprintf("Content %d: %s", i+1, accordionContentSmall)),
+			core.StateOf[bool](wnd, fmt.Sprintf("accordion_small_state_%d", i)),
+		).Small().HideSeparator().Frame(ui.Frame{MaxWidth: ui.L256}))
+	}
+
 	return ui.Grid(
 		ui.GridCell(
 			ui.VStack(
 				accordions...,
 			),
+		),
+		ui.GridCell(
+			ui.VStack(
+				accordionsSmall...,
+			).FullWidth(),
 		),
 	).Columns(1).Gap(ui.L32).FullWidth().Heights("auto")
 }

@@ -102,9 +102,12 @@ func Content(wnd core.Window) core.View {
 			MarkerEnd:    flowchart.EdgeMarkerArrow,
 		},
 		{
-			ID:           "gcantz-gcantznicht",
-			SourceNodeID: "guido-cantz",
-			TargetNodeID: "guido-cantz-nicht",
+			ID:             "gcantz-gcantznicht",
+			SourceNodeID:   "guido-cantz",
+			TargetNodeID:   "guido-cantz-nicht",
+			Label:          "mag gerne",
+			LabelBgColor:   ui.ColorSemanticGood,
+			LabelTextColor: ui.ColorWhite,
 		},
 		{
 			ID:           "kpohl-color",
