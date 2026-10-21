@@ -107,7 +107,8 @@ func themeSwitcherMenuEntry() core.View {
 }
 
 func versionsView() core.View {
-	versionText := fmt.Sprintf("Demo-App: %s\nNAGO: %s", util.Version(), util.DependencyVersion("go.wdy.de/nago"))
+	demoAppVersionText := fmt.Sprintf("Demo-App: %s", util.Version())
+	nagoVersionText := fmt.Sprintf("NAGO: %s", util.DependencyVersion("go.wdy.de/nago"))
 
 	return ui.VStack(
 		ui.HStack(
@@ -116,9 +117,11 @@ func versionsView() core.View {
 				Color(ui.ColorText.WithTransparency(50)).
 				Padding(ui.Padding{Left: ui.L4}),
 		).Position(ui.Position{Type: ui.PositionAbsolute, Left: ui.L0, Bottom: ui.Full}),
-		ui.Text(versionText).Font(ui.MonoMedium),
+		ui.Text(demoAppVersionText).Font(ui.MonoMedium),
+		ui.Text(nagoVersionText).Font(ui.MonoMedium),
 	).
 		NoClip(true).
+		Alignment(ui.Leading).
 		Position(ui.Position{Type: ui.PositionRelative}).
 		Responsive(func(wnd core.Window, stack ui.TStack) ui.TStack {
 			copyVersionsState := core.StateOf[bool](wnd, "copyVersionsState")
@@ -134,7 +137,8 @@ func versionsView() core.View {
 			)
 
 			return stack.Action(func() {
-				if err := wnd.Clipboard().SetText(versionText); err != nil {
+				text := fmt.Sprintf("%s\n%s", demoAppVersionText, nagoVersionText)
+				if err := wnd.Clipboard().SetText(text); err != nil {
 					alert.ShowBannerError(wnd, err)
 					copyVersionsState.Set(false)
 					return
