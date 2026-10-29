@@ -4,9 +4,8 @@ go 1.27.0
 
 require (
 	github.com/worldiety/option v0.0.0-20251007074526-863facc0bc83
-	go.wdy.de/nago v0.0.0-20261028143433-7f19f988f622
+	go.wdy.de/nago v0.0.0-20261029132155-5b4c71ff6536
 )
-
 
 require (
 	github.com/dop251/goja v0.0.0-20260917113740-793a2a65c13b // indirect
