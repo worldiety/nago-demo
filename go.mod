@@ -1,15 +1,15 @@
 module github.com/worldiety/nago-demo
 
-go 1.27.0
+go 1.27.3
 
 require (
 	github.com/worldiety/option v0.0.0-20251007074526-863facc0bc83
-	go.wdy.de/nago v0.0.0-20261102113054-7a59f5249a2d
+	go.wdy.de/nago v0.0.0-20261104091210-dd07a099770a
 )
 
 require (
 	github.com/dop251/goja v0.0.0-20260917113740-793a2a65c13b // indirect
-	github.com/go-chi/chi/v5 v5.4.0 // indirect
+	github.com/go-chi/chi/v5 v5.4.1-0.20261013232336-607557061251 // indirect
 	github.com/go-chi/cors v1.2.2 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
 	github.com/google/btree v1.1.3 // indirect
