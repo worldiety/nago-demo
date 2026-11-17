@@ -4,7 +4,7 @@ go 1.27.3
 
 require (
 	github.com/worldiety/option v0.0.0-20251007074526-863facc0bc83
-	go.wdy.de/nago v0.0.0-20261105134707-dcc13e26a50f
+	go.wdy.de/nago v0.0.0-20261117071620-11703d7121ff
 )
 
 require (
@@ -17,7 +17,7 @@ require (
 	github.com/gosimple/slug v1.15.0 // indirect
 	github.com/gosimple/unidecode v1.0.1 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
-	github.com/klauspost/compress v1.20.1 // indirect
+	github.com/klauspost/compress v1.20.4 // indirect
 	github.com/laher/mergefs v0.1.1 // indirect
 	github.com/rogpeppe/go-internal v1.16.0 // indirect
 	github.com/tidwall/btree v1.8.1 // indirect
@@ -29,6 +29,7 @@ require (
 	github.com/yuin/goldmark v1.8.6 // indirect
 	golang.org/x/crypto v0.58.0 // indirect
 	golang.org/x/image v0.46.0 // indirect
+	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/sys v0.49.0 // indirect
 	golang.org/x/text v0.43.0 // indirect
 )
