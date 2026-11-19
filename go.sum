@@ -98,6 +98,8 @@ go.wdy.de/nago v0.0.0-20261117071620-11703d7121ff h1:MAVv5INqzbEoFWup7TV/sHi0UsY
 go.wdy.de/nago v0.0.0-20261117071620-11703d7121ff/go.mod h1:tLlKU/dQQeMEk3WEEJ286A+bY4rNYwG7hmt4Z9Sp08A=
 go.wdy.de/nago v0.0.0-20261117190841-2212121b8734 h1:yJgjTO/vBihw7tEA5ZNRDJp6nsPWTRISFYOluWIqkZE=
 go.wdy.de/nago v0.0.0-20261117190841-2212121b8734/go.mod h1:tLlKU/dQQeMEk3WEEJ286A+bY4rNYwG7hmt4Z9Sp08A=
+go.wdy.de/nago v0.0.0-20261118135850-92ab66db5049 h1:Q7ZkJfRNl92h7oYDGVYnITFzFygd2oGOeBuvnu6tKC0=
+go.wdy.de/nago v0.0.0-20261118135850-92ab66db5049/go.mod h1:tLlKU/dQQeMEk3WEEJ286A+bY4rNYwG7hmt4Z9Sp08A=
 golang.org/x/crypto v0.57.0 h1:3ZVCjf8Ggz7zneR/EHRVx68Ctf+2pmIMP2UFhh9cC6M=
 golang.org/x/crypto v0.57.0/go.mod h1:Fdz0i5U6CoizGwLda9DttjSk6qlZo25zYNtR+ycvuZA=
 golang.org/x/crypto v0.58.0 h1:COkYLr4k7nDI4r6QtMML2AfzeIswWHAJthLS6K/M/54=
