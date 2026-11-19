@@ -1,4 +1,4 @@
-package dataview
+package dataview_table
 
 import (
 	_ "embed"
@@ -57,6 +57,10 @@ var vehicles = []Vehicle{
 }
 
 func Content(wnd core.Window) core.View {
+	return Dataview(wnd, dataview.Table)
+}
+
+func Dataview(wnd core.Window, style dataview.Style) core.View {
 	createDialogPresented := core.AutoState[bool](wnd)
 
 	return ui.Stack(
@@ -122,6 +126,7 @@ func Content(wnd core.Window) core.View {
 				},
 			},
 		}).
+			Style(style).
 			NextActionIndicator(true).
 			SelectOptions(dataview.NewSelectOptionDelete(wnd, func(selected []VID) error {
 				for _, id := range selected {

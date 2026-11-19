@@ -8,7 +8,9 @@ import (
 	"github.com/worldiety/nago-demo/pages/content/accordion"
 	"github.com/worldiety/nago-demo/pages/content/alert"
 	"github.com/worldiety/nago-demo/pages/content/chart"
-	"github.com/worldiety/nago-demo/pages/content/dataview"
+	dataview_card "github.com/worldiety/nago-demo/pages/content/dataview-cards"
+	"github.com/worldiety/nago-demo/pages/content/dataview-list"
+	"github.com/worldiety/nago-demo/pages/content/dataview-table"
 	"github.com/worldiety/nago-demo/pages/content/dialog"
 	"github.com/worldiety/nago-demo/pages/content/flowchart"
 	"github.com/worldiety/nago-demo/pages/content/hero"
@@ -39,7 +41,15 @@ var categoryOptions = []dropdown.Option[string]{
 		Label: "Banner",
 	},
 	{
-		Value: "dataview",
+		Value: "dataview-card",
+		Label: "Daten-Karten",
+	},
+	{
+		Value: "dataview-list",
+		Label: "Daten-Liste",
+	},
+	{
+		Value: "dataview-table",
 		Label: "Daten-Tabelle",
 	},
 	{
@@ -107,8 +117,12 @@ func pageContent(wnd core.Window, page string, ctx ContentContext) core.View {
 		return alert.Content(wnd)
 	case "chart":
 		return chart.Content(wnd)
-	case "dataview":
-		return dataview.Content(wnd)
+	case "dataview-card":
+		return dataview_card.Content(wnd)
+	case "dataview-list":
+		return dataview_list.Content(wnd)
+	case "dataview-table":
+		return dataview_table.Content(wnd)
 	case "dialog":
 		return dialog.Content(wnd)
 	case "flowchart":
