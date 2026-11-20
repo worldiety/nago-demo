@@ -80,6 +80,7 @@ func Dataview(wnd core.Window, style dataview.Style) core.View {
 				}
 				return option.None[Vehicle](), nil
 			},
+			AccessibilityLabel: func(v Vehicle) string { return fmt.Sprintf("%s %s (%dPS)", v.Brand, v.Model, v.HorsePower) },
 			Fields: []dataview.Field[Vehicle]{
 				{
 					ID:   "brand",
@@ -127,7 +128,6 @@ func Dataview(wnd core.Window, style dataview.Style) core.View {
 			},
 		}).
 			Style(style).
-			NextActionIndicator(true).
 			SelectOptions(dataview.NewSelectOptionDelete(wnd, func(selected []VID) error {
 				for _, id := range selected {
 					vehicles = slices.DeleteFunc(vehicles, func(v Vehicle) bool {
@@ -136,6 +136,9 @@ func Dataview(wnd core.Window, style dataview.Style) core.View {
 				}
 				return nil
 			})).
+			Action(func(v Vehicle) {
+				alert.ShowBannerMessage(wnd, alert.Message{Title: "Eintrag-Interaktion", Message: fmt.Sprintf("%s %s", v.Brand, v.Model), Intent: alert.IntentOk})
+			}).
 			CreateAction(func() { createDialogPresented.Set(true) }).
 			ModelOptions(pager.ModelOptions{PageSize: 10}).
 			Search(true),

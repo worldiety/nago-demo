@@ -35,8 +35,20 @@ var categoryOptions = []dropdown.Option[string]{
 		Label: "Slider",
 	},
 	{
-		Value: "text",
-		Label: "Text",
+		Value: "text-filled",
+		Label: "Text (gefüllt)",
+	},
+	{
+		Value: "text-basic",
+		Label: "Text (minimal)",
+	},
+	{
+		Value: "text-reduced",
+		Label: "Text (reduziert)",
+	},
+	{
+		Value: "text-outlined",
+		Label: "Text (umrandet)",
 	},
 	{
 		Value: "signature",
@@ -85,8 +97,14 @@ func pageContent(wnd core.Window, page string) core.View {
 		return signature.Content(wnd)
 	case "slider":
 		return slider.Content(wnd)
-	case "text":
-		return text.Content(wnd)
+	case "text-basic":
+		return text.Content(wnd, ui.TextFieldBasic)
+	case "text-filled":
+		return text.Content(wnd, ui.TextFieldFilled)
+	case "text-outlined":
+		return text.Content(wnd, ui.TextFieldOutlined)
+	case "text-reduced":
+		return text.Content(wnd, ui.TextFieldReduced)
 	}
 
 	return ui.HStack(ui.Text(fmt.Sprintf("unknown category '%s'", page)))

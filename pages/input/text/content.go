@@ -11,20 +11,20 @@ import (
 	"go.wdy.de/nago/presentation/ui"
 )
 
-func Content(wnd core.Window) core.View {
+func Content(wnd core.Window, style ui.TextFieldStyle) core.View {
 	cols := 2
 	if wnd.Info().SizeClass < core.SizeClassLarge {
 		cols = 1
 	}
 
 	return ui.Grid(
-		ui.GridCell(tableSingleLine(wnd)),
-		ui.GridCell(tableMultiLine(wnd)),
-		ui.GridCell(tableOther(wnd)),
+		ui.GridCell(tableSingleLine(wnd, style)),
+		ui.GridCell(tableMultiLine(wnd, style)),
+		ui.GridCell(tableOther(wnd, style)),
 	).Columns(cols).Gap(ui.L32).FullWidth().Heights("auto")
 }
 
-func tableSingleLine(wnd core.Window) core.View {
+func tableSingleLine(wnd core.Window, style ui.TextFieldStyle) core.View {
 	stateTextDefault := core.StateOf[string](wnd, "stateText")
 	stateTextIconLeft := core.StateOf[string](wnd, "stateTextIconLeft")
 	stateTextIconRight := core.StateOf[string](wnd, "stateTextIconRight")
@@ -37,35 +37,41 @@ func tableSingleLine(wnd core.Window) core.View {
 	return table("Einzeilig",
 		layout.ComponentValueTableRow{
 			Component: ui.TextField("Standard", stateTextDefault.Get()).
+				Style(style).
 				InputValue(stateTextDefault),
 			Value: stateTextDefault.Get(),
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.TextField("Icon links", stateTextIconLeft.Get()).
+				Style(style).
 				InputValue(stateTextIconLeft).
 				Leading(ui.ImageIcon(icons.People_outline)),
 			Value: stateTextIconLeft.Get(),
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.TextField("Icon rechts", stateTextIconRight.Get()).
+				Style(style).
 				InputValue(stateTextIconRight).
 				Trailing(ui.ImageIcon(icons.Help_outline)),
 			Value: stateTextIconRight.Get(),
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.TextField("Support", stateTextSupport.Get()).
+				Style(style).
 				InputValue(stateTextSupport).
 				SupportingText("Hier steht ein Support-Text"),
 			Value: stateTextSupport.Get(),
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.TextField("Fehler", stateTextError.Get()).
+				Style(style).
 				InputValue(stateTextError).
 				ErrorText("Hier steht ein Fehler-Text"),
 			Value: stateTextError.Get(),
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.TextField("Disabled", stateTextDisabled.Get()).
+				Style(style).
 				InputValue(stateTextDisabled).
 				Disabled(true),
 			Value: stateTextDisabled.Get(),
@@ -73,7 +79,7 @@ func tableSingleLine(wnd core.Window) core.View {
 	)
 }
 
-func tableMultiLine(wnd core.Window) core.View {
+func tableMultiLine(wnd core.Window, style ui.TextFieldStyle) core.View {
 	stateTextMultilineDefault := core.StateOf[string](wnd, "stateTextMultilineDefault")
 	stateTextMultilineSupport := core.StateOf[string](wnd, "stateTextMultilineSupport")
 	stateTextMultilineError := core.StateOf[string](wnd, "stateTextMultilineError")
@@ -84,12 +90,14 @@ func tableMultiLine(wnd core.Window) core.View {
 	return table("Mehrzeilig",
 		layout.ComponentValueTableRow{
 			Component: ui.TextField("Standard", stateTextMultilineDefault.Get()).
+				Style(style).
 				InputValue(stateTextMultilineDefault).
 				Lines(3),
 			Value: stateTextMultilineDefault.Get(),
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.TextField("Support", stateTextMultilineSupport.Get()).
+				Style(style).
 				InputValue(stateTextMultilineSupport).
 				Lines(3).
 				SupportingText("Hier steht ein Support-Text"),
@@ -97,6 +105,7 @@ func tableMultiLine(wnd core.Window) core.View {
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.TextField("Fehler", stateTextMultilineError.Get()).
+				Style(style).
 				InputValue(stateTextMultilineError).
 				Lines(3).
 				ErrorText("Hier steht ein Fehler-Text"),
@@ -104,6 +113,7 @@ func tableMultiLine(wnd core.Window) core.View {
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.TextField("Disabled", stateTextMultilineDisabled.Get()).
+				Style(style).
 				InputValue(stateTextMultilineDisabled).
 				Lines(3).
 				Disabled(true),
@@ -112,7 +122,7 @@ func tableMultiLine(wnd core.Window) core.View {
 	)
 }
 
-func tableOther(wnd core.Window) core.View {
+func tableOther(wnd core.Window, style ui.TextFieldStyle) core.View {
 	statePasswordDefault := core.StateOf[string](wnd, "statePasswordDefault")
 	statePasswordSupport := core.StateOf[string](wnd, "statePasswordSupport")
 	statePasswordError := core.StateOf[string](wnd, "statePasswordError")
@@ -125,34 +135,40 @@ func tableOther(wnd core.Window) core.View {
 	return table("Weitere",
 		layout.ComponentValueTableRow{
 			Component: ui.PasswordField("Passwort", statePasswordDefault.Get()).
+				Style(style).
 				InputValue(statePasswordDefault),
 			Value: statePasswordDefault.Get(),
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.PasswordField("Passwort mit Support", statePasswordSupport.Get()).
+				Style(style).
 				InputValue(statePasswordSupport).
 				SupportingText("Hier steht ein Support-Text"),
 			Value: statePasswordSupport.Get(),
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.PasswordField("Passwort mit Fehler", statePasswordError.Get()).
+				Style(style).
 				InputValue(statePasswordError).
 				ErrorText("Hier steht ein Fehler-Text"),
 			Value: statePasswordError.Get(),
 		},
 		layout.ComponentValueTableRow{
 			Component: ui.PasswordField("Passwort disabled", statePasswordDisabled.Get()).
+				Style(style).
 				InputValue(statePasswordDisabled).
 				Disabled(true),
 			Value: statePasswordDisabled.Get(),
 		},
 		layout.ComponentValueTableRow{
-			Component: ui.IntField("Zahlen", stateIntDefault.Get(), stateIntDefault),
-			Value:     strconv.FormatInt(stateIntDefault.Get(), 10),
+			Component: ui.IntField("Zahlen", stateIntDefault.Get(), stateIntDefault).
+				Style(style),
+			Value: strconv.FormatInt(stateIntDefault.Get(), 10),
 		},
 		layout.ComponentValueTableRow{
-			Component: ui.FloatField("Dezimal", stateFloatDefault.Get(), stateFloatDefault),
-			Value:     fmt.Sprintf("%f", stateFloatDefault.Get()),
+			Component: ui.FloatField("Dezimal", stateFloatDefault.Get(), stateFloatDefault).
+				Style(style),
+			Value: fmt.Sprintf("%f", stateFloatDefault.Get()),
 		},
 	)
 }
