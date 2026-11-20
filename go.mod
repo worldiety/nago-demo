@@ -7,8 +7,6 @@ require (
 	go.wdy.de/nago v0.0.0-20261120075718-448efc88a48b
 )
 
-replace go.wdy.de/nago => ../nago-github
-
 require (
 	github.com/dop251/goja v0.0.0-20260917113740-793a2a65c13b // indirect
 	github.com/go-chi/chi/v5 v5.4.1-0.20261013232336-607557061251 // indirect
